@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ username }} || HBCU Safe Spaces </title>
+</head>
+<body>
+
+{% if current_user.is_friend %}
+
+You are connected to {{ username }}.
+
+{% else %}
+<a href="/addfriend/{{ username }}">Add {{ username }} as a friend!</a>
+
+{% endif %}
+ 
+{% if content %}
+{% for x in content %}
+<p> {{ x['post'] }} </p>
+{{ x['timestamp'] }}
+{% endfor %}
+{% endif %}
+
+{% if current_user.username == username %}
+
+<form method="POST" action="/timeline">
+	<input type="text" name="content">
+	<input type="submit" name="Submit">
+</form>
+
+{% endif %}
+
+</body>
+</html>
